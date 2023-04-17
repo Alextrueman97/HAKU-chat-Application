@@ -1,7 +1,12 @@
 package haku.com.chatApplication.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import haku.com.chatApplication.entities.UserAccount;
+import haku.com.chatApplication.repositories.UserAccountRepository;
 
 @Service
 public class UserAccountService {
@@ -17,12 +22,10 @@ public class UserAccountService {
 		return userAccountRepository.login(email, password);
 	}
 	
-	@Override
 	public UserAccount updateUser(UserAccount userAccount) {
 		return userAccountRepository.save(userAccount);
 	}
 	
-	@Override
 	public Optional<UserAccount> findUserByUserId(int accountId){
 		return userAccountRepository.findById(accountId);
 	}

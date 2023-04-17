@@ -2,13 +2,15 @@ package haku.com.chatApplication.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "user_accounts")
+@Table(name = "user_account")
 public class UserAccount {
     
     @Id
@@ -25,6 +27,9 @@ public class UserAccount {
     private String password;
     
     private String avatarUrl;
+    
+    @Enumerated(EnumType.STRING)
+    private UserRole role = UserRole.USER;
 
 	public UserAccount() {
 		super();
@@ -38,7 +43,30 @@ public class UserAccount {
 		this.password = password;
 		this.avatarUrl = avatarUrl;
 	}
+	
+	public UserAccount(int accountId, String username, String email, String password, String avatarUrl, UserRole role) {
+		super();
+		this.accountId = accountId;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.avatarUrl = avatarUrl;
+		this.role = role;
+	}
 
+	public UserAccount(String username, String email, String password, UserRole role) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
+
+	public UserAccount(String email, String password) {
+		super();
+		this.email = email;
+		this.password =  password;
+	}
 	
 	public int getAccountId() {
 		return accountId;
@@ -80,4 +108,14 @@ public class UserAccount {
 		this.avatarUrl = avatarUrl;
 	}
 
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+
+	
+	
 }
