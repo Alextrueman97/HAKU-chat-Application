@@ -1,4 +1,4 @@
-package haku.com.entities;
+package haku.com.chatApplication.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
