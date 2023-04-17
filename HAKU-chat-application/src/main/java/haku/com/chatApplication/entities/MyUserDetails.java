@@ -45,6 +45,14 @@ public class MyUserDetails implements UserDetails {
 		return userAccount.getAccountId();
 	}
 	
+	public String getAvatarUrl() {
+		return userAccount.getAvatarUrl();
+	}
+	
+	public UserRole getRole() {
+		return userAccount.getRole();
+	}
+	
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
