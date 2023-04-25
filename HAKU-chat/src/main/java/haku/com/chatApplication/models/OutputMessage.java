@@ -1,4 +1,4 @@
-package haku.com.chatApplication.model;
+package haku.com.chatApplication.models;
 
 public class OutputMessage {
 

@@ -7,8 +7,8 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
-import haku.com.chatApplication.model.OutputMessage;
 import haku.com.chatApplication.models.Message;
+import haku.com.chatApplication.models.OutputMessage;
 
 @Controller
 public class MessageController {
