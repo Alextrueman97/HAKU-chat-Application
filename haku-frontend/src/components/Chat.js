@@ -4,13 +4,19 @@ import axios from 'axios';
 export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
+  const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const socket = new WebSocket('ws://localhost:8080/chat');
+    const socket = new WebSocket('ws://localhost:8080/chatApp/chat');
     socket.onmessage = event => {
       const message = JSON.parse(event.data);
       setMessages(prevMessages => [...prevMessages, message]);
     };
+    socket.onopen = () => {
+      socket.send(JSON.stringify({ type: 'SUBSCRIBE', destination: '/topic/messages'}));
+    }
+    setSocket(socket);
+
 
     return () => {
       socket.close();
@@ -21,13 +27,24 @@ export default function Chat() {
     setInputText(event.target.value);
   };
 
-  const handleSendMessage = () => {
+ /* const handleSendMessage = () => {
     axios.post('/chat', {
       from: 'user',
       text: inputText
     });
     setInputText('');
+  };*/
+
+  const handleSendMessage = () => {
+    const message = {
+      from: 'user',
+      text: inputText,
+      time: new Date().toLocaleTimeString()
+    };
+    socket.send(JSON.stringify({ type: 'SEND', destination: '/app/chat', body: JSON.stringify(message) }));
+    setInputText('');
   };
+    
 
   return (
     <div>
